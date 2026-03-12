@@ -11,6 +11,7 @@ allBtn.onclick = function () {
     allBtn.classList.add("btn-active");
     openBtn.classList.remove("btn-active");
     closedBtn.classList.remove("btn-active");
+    searchInput.value = "";
     filterAndDisplayIssues();
 };
 
@@ -19,6 +20,7 @@ openBtn.onclick = function () {
     openBtn.classList.add("btn-active");
     allBtn.classList.remove("btn-active");
     closedBtn.classList.remove("btn-active");
+    searchInput.value = "";
     filterAndDisplayIssues();
 };
 
@@ -27,6 +29,7 @@ closedBtn.onclick = function () {
     closedBtn.classList.add("btn-active");
     allBtn.classList.remove("btn-active");
     openBtn.classList.remove("btn-active");
+    searchInput.value = "";
     filterAndDisplayIssues();
 };
 
@@ -151,6 +154,10 @@ const displayIssues = (issues) => {
 
 searchBtn.onclick = () => {
     const keyword = searchInput.value.trim().toLowerCase();
+
+    allBtn.classList.remove("btn-active");
+    openBtn.classList.remove("btn-active");
+    closedBtn.classList.remove("btn-active");
 
     const filteredIssues = allIssues.filter(issue =>
         issue.title.toLowerCase().includes(keyword) ||
