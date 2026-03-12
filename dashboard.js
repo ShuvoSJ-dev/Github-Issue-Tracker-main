@@ -36,7 +36,7 @@ const loadIssues = () => {
                 displayIssues(allIssues);
                 updateCount(allIssues);
 
-        
+
 
             },);
         });
@@ -51,19 +51,18 @@ const displayIssues = (issues) => {
 
     issues.forEach(issue => {
 
-        const statusColor = issue.status === "open" ? "border-green-600" : "border-purple-600";
-        const statusIcon = issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png";
+        const statusColor = issue.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]";
+        const statusIcon = issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png";
 
         const card = document.createElement("div");
-        
+
 
         card.innerHTML = `
-        <div id="level-container"
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-10/11 md:w-5/6 lg:w-7/9 mx-auto mt-4">
+        
 
-            <div class="bg-white rounded-xl py-5 px-5 space-y-4 border-t-4 ${statusColor}">
+            <div class="bg-white rounded-xl py-5 px-5 space-y-4 border-t-4 ${statusColor} h-full">
                 <div class="flex justify-between ">
-                    <img class="size-8" src="./assets/Open-Status.png">
+                    <img class="size-8" src="${statusIcon}">
                     <span class="bg-gray-300 py-1 px-4 rounded-2xl">HIGH</span>
                 </div>
                 <h2 class="font-bold text-2xl">${issue.title}</h2>
@@ -76,11 +75,13 @@ const displayIssues = (issues) => {
                             class="fa-solid fa-life-ring" style="color: rgb(170, 135, 11);"></i>${issue.label}</p>
 
                 </div>
+            </div>
+     
 `;
 
-card.addEventListener("click", () => {
-    openModal(issue);
-});
+        card.addEventListener("click", () => {
+            openModal(issue);
+        });
 
         container.appendChild(card);
     });
