@@ -125,13 +125,13 @@ const displayIssues = (issues) => {
 
                 <div class="flex gap-3 text-sm font-normal flex-wrap">
                   ${issue.labels.map(label => {
-                       const cfg = labelConfig[label] || { color: "bg-gray-100 text-gray-600", icon: "fa-solid fa-tag" };
-                            return `
+            const cfg = labelConfig[label] || { color: "bg-gray-100 text-gray-600", icon: "fa-solid fa-tag" };
+            return `
                            <p class="${cfg.color} px-4 py-2 rounded-3xl font-semibold flex items-center gap-2">
                              <i class="${cfg.icon}"></i> ${label.toUpperCase()}
                            </p>
                         `;
-                    }).join("")}
+        }).join("")}
                 </div>
                 
                 <hr class="border-gray-300">
@@ -146,6 +146,19 @@ const displayIssues = (issues) => {
 
         container.appendChild(card);
     });
+};
+
+
+searchBtn.onclick = () => {
+    const keyword = searchInput.value.trim().toLowerCase();
+
+    const filteredIssues = allIssues.filter(issue =>
+        issue.title.toLowerCase().includes(keyword) ||
+        issue.description.toLowerCase().includes(keyword) ||
+        issue.labels.some(label => label.toLowerCase().includes(keyword))
+    );
+    displayIssues(filteredIssues);
+    updateCount(filteredIssues);
 };
 
 loadIssues();
