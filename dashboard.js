@@ -4,22 +4,48 @@ const closedBtn = document.getElementById("closed");
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 
+let currentStatusFilter = "all";
+
 allBtn.onclick = function () {
+    currentStatusFilter = "all";
     allBtn.classList.add("btn-active");
     openBtn.classList.remove("btn-active");
     closedBtn.classList.remove("btn-active");
+    filterAndDisplayIssues();
 };
 
 openBtn.onclick = function () {
+    currentStatusFilter = "open";
     openBtn.classList.add("btn-active");
     allBtn.classList.remove("btn-active");
     closedBtn.classList.remove("btn-active");
+    filterAndDisplayIssues();
 };
 
 closedBtn.onclick = function () {
+    currentStatusFilter = "closed";
     closedBtn.classList.add("btn-active");
     allBtn.classList.remove("btn-active");
     openBtn.classList.remove("btn-active");
+    filterAndDisplayIssues();
+};
+
+
+const filterAndDisplayIssues = () => {
+    let filtered = allIssues;
+
+    if (currentStatusFilter !== "all") {
+        filtered = filtered.filter(issue => issue.status === currentStatusFilter);
+    }
+
+    displayIssues(filtered);
+    updateCount(filtered);
+};
+
+const updateCount = (issues) => {
+    const countElement = document.getElementById("issue-count");
+    const count = issues.length;
+    countElement.textContent = `${count} Issues`;
 };
 
 
@@ -93,6 +119,7 @@ const displayIssues = (issues) => {
                     <img class="size-8" src="${statusIcon}">
                     <span class="${priorityColor} py-1 px-4 rounded-2xl font-semibold">${issue.priority.toUpperCase()}</span>
                 </div>
+
                 <h2 class="font-bold text-2xl">${issue.title}</h2>
                 <p class=" text-gray-500">${issue.description}</p>
 
