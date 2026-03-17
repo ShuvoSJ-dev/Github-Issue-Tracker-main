@@ -55,6 +55,7 @@ const updateCount = (issues) => {
 let allIssues = [];
 
 const loadIssues = () => {
+    toggleLoader(true);
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then(res => res.json())
         .then(data => {
@@ -62,7 +63,9 @@ const loadIssues = () => {
                 allIssues = data.data;
                 displayIssues(allIssues);
                 updateCount(allIssues);
-            },);
+
+                toggleLoader(false);
+            },500);
         });
 };
 
@@ -167,5 +170,17 @@ searchBtn.onclick = () => {
     displayIssues(filteredIssues);
     updateCount(filteredIssues);
 };
+
+const toggleLoader = (show) => {
+    const loader = document.getElementById("loader");
+
+    if (show) {
+        loader.classList.remove("hidden");
+    } else {
+        loader.classList.add("hidden");
+    }
+};
+
+
 
 loadIssues();
