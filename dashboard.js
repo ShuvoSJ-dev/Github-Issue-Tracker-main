@@ -65,7 +65,7 @@ const loadIssues = () => {
                 updateCount(allIssues);
 
                 toggleLoader(false);
-            },500);
+            }, 500);
         });
 };
 
@@ -182,5 +182,56 @@ const toggleLoader = (show) => {
 };
 
 
+const openModal = (issue) => {
+    document.getElementById("modal-title").innerText = issue.title;
+
+    const statusEl = document.getElementById("modal-status");
+
+    if (issue.status === "open") {
+        statusEl.innerText = "Opened";
+        statusEl.className = "px-3 py-1 rounded-full text-white text-sm bg-green-500";
+    } else {
+        statusEl.innerText = "Closed";
+        statusEl.className = "px-3 py-1 rounded-full text-white text-sm bg-purple-500";
+    }
+
+    document.getElementById("modal-author").innerText = issue.author;
+    document.getElementById("modal-date").innerText =
+        issue.createdAt.slice(0, 10);
+    document.getElementById("modal-description").innerText =
+        issue.description;
+    document.getElementById("modal-assignee").innerText =
+        issue.author;
+
+    const priorityEl = document.getElementById("modal-priority");
+    priorityEl.innerText = issue.priority.toUpperCase();
+
+    if (issue.priority === "high") {
+        priorityEl.className =
+            "px-3 py-1 rounded-full text-white text-sm bg-red-500";
+    } else if (issue.priority === "medium") {
+        priorityEl.className =
+            "px-3 py-1 rounded-full text-white text-sm bg-yellow-500";
+    } else {
+        priorityEl.className =
+            "px-3 py-1 rounded-full text-white text-sm bg-gray-500";
+    }
+
+    const labelsContainer = document.getElementById("modal-labels");
+    labelsContainer.innerHTML = "";
+
+    issue.labels.forEach(label => {
+        const span = document.createElement("span");
+
+        span.className =
+            "px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-700";
+
+        span.innerText = label;
+
+        labelsContainer.appendChild(span);
+    });
+
+    document.getElementById("issueModal").showModal();
+};
 
 loadIssues();

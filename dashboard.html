@@ -104,6 +104,46 @@
 
     </section>
 
+    <dialog id="issueModal" class="modal">
+        <div class="modal-box max-w-xl">
+
+            <div class="flex items-center justify-between mb-3">
+                <h3 id="modal-title" class="font-bold text-xl"></h3>
+
+            </div>
+            <div class="flex pb-4 gap-4">
+                <span id="modal-status" class="px-3 py-1 rounded-full text-white text-sm"></span>
+
+                <span><i class="fa-solid fa-circle" style="color: rgb(123, 122, 118);"></i> Opened by <span
+                        id="modal-author"></span></span>
+
+                <span><i class="fa-solid fa-circle size-4" style="color: rgb(123, 122, 118);"></i><span
+                        id="modal-date"></span> </span>
+            </div>
+
+            <div id="modal-labels" class="flex gap-2 mb-3"></div>
+
+            <p id="modal-description" class="text-gray-600 mb-4"></p>
+
+            <div class="grid grid-cols-2 gap-4 bg-gray-100 p-4 rounded-lg mb-4">
+                <div>
+                    <p class="text-sm text-gray-500">Assignee:</p>
+                    <p id="modal-assignee" class="font-semibold"></p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">Priority:</p>
+                    <span id="modal-priority" class="px-3 py-1 rounded-full text-white text-sm"></span>
+                </div>
+            </div>
+
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn btn-primary">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
     <script src="./dashboard.js"></script>
 </body>
 
