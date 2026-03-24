@@ -227,16 +227,38 @@ const openModal = (issue) => {
             "px-3 py-1 rounded-full text-white text-sm bg-gray-500";
     }
 
+        const labelConfig = {
+        bug: {
+            color: "bg-red-100 text-red-600",
+            icon: "fa-solid fa-bug"
+        },
+        enhancement: {
+            color: "bg-green-100 text-green-600",
+            icon: "fa-solid fa-wand-magic-sparkles"
+        },
+        documentation: {
+            color: "bg-blue-100 text-blue-600",
+            icon: "fa-solid fa-book"
+        },
+        "help wanted": {
+            color: "bg-yellow-100 text-yellow-600",
+            icon: "fa-solid fa-life-ring"
+        },
+        "good first issue": {
+            color: "bg-lime-100 text-lime-600",
+            icon: "fa-solid fa-circle-exclamation"
+        }
+    };
+
     const labelsContainer = document.getElementById("modal-labels");
     labelsContainer.innerHTML = "";
 
     issue.labels.forEach(label => {
+ const cfg = labelConfig[label] || { color: "bg-gray-100 text-gray-600", icon: "fa-solid fa-tag" };
+        
         const span = document.createElement("span");
-
-        span.className =
-            "px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-700";
-
-        span.innerText = label;
+        span.className = `${cfg.color} px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-2`;
+        span.innerHTML = `<i class="${cfg.icon}"></i> ${label.toUpperCase()}`;
 
         labelsContainer.appendChild(span);
     });
